@@ -14,4 +14,6 @@ To getting started with this app, will be really easy
 3. exec the following command to start using it, `docker-compose up`
 4. once your services are up, so go to your prefer browser and type `https:/localhost:3300` to test the app
 
+![](weather-app-demo.gif)
+
 ## Happy Coding :sunglasses: :rocket:

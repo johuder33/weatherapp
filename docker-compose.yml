@@ -5,6 +5,7 @@ services:
     build: ./server
     volumes:
       - ./server/:/server
+      - ./server/node_modules
     environment:
       - SERVER_PORT=${SERVER_PORT}
       - DARK_SKY_KEY=${DARK_SKY_KEY}
@@ -21,6 +22,7 @@ services:
     volumes:
       - ./client/src:/app/src
       - ./client/public:/app/public
+      - ./client/node_modules
     environment:
       - PORT=${PORT}
       - REACT_APP_GOOGLE_MAPS_URL=${REACT_APP_GOOGLE_MAPS_URL}

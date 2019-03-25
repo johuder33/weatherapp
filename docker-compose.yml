@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  server:
+    build: ./server
+    volumes:
+      - ./server/:/server
+    environment:
+      - SERVER_PORT=${SERVER_PORT}
+      - DARK_SKY_KEY=${DARK_SKY_KEY}
+      - DARK_SKY_URL=${DARK_SKY_URL}
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    command: npm start
+
+  app:
+    build:
+      context: ./client
+      args:
+        SERVICE_URL: http://server:${SERVER_PORT}/
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+    environment:
+      - PORT=${PORT}
+      - REACT_APP_GOOGLE_MAPS_URL=${REACT_APP_GOOGLE_MAPS_URL}
+      - REACT_APP_GOOGLE_MAPS_KEY=${REACT_APP_GOOGLE_MAPS_KEY}
+      - REACT_APP_SERVICE_URL=http://server:${SERVER_PORT}/
+      - HTTPS=${HTTPS}
+    expose:
+      - ${PORT}
+    ports:
+      - ${PORT}:${PORT}
+    command: npm start
+    links:
+      - server
